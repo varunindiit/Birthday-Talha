@@ -6,7 +6,7 @@ import { dateLabel, finale, sender } from '../lib/content.js';
 import { gsap, prefersReducedMotion, useGSAP } from '../lib/gsap.js';
 import './Finale.css';
 
-// Scene five. The wish itself, as the light comes up.
+// Scene four. The wish itself, as the light comes up.
 export default function Finale({ onReplay }) {
   const root = useRef(null);
   const lenis = useLenis();

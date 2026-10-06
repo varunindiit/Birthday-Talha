@@ -8,7 +8,7 @@ import { celebration } from '../lib/content.js';
 import { gsap, hasFinePointer, prefersReducedMotion, useGSAP } from '../lib/gsap.js';
 import './Celebration.css';
 
-// Scene four. One candle, and the reader lights it.
+// Scene three. One candle, and the reader lights it.
 export default function Celebration() {
   const root = useRef(null);
   const canvas = useRef(null);
@@ -104,7 +104,7 @@ export default function Celebration() {
   });
 
   return (
-    <section ref={root} className={`celebration sheet${lit ? ' is-lit' : ''}`} aria-labelledby="celebration-title">
+    <section ref={root} className={`celebration sheet sheet--rounded${lit ? ' is-lit' : ''}`} aria-labelledby="celebration-title">
       <Embers className="celebration__embers" />
       <div className="celebration__bloom" aria-hidden="true" />
 

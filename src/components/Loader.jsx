@@ -85,7 +85,7 @@ export default function Loader({ onReveal, onDone }) {
           ))}
         </p>
         <p className="loader__occasion">
-          <span className="loader__occasion-inner">A birthday, in five short scenes</span>
+          <span className="loader__occasion-inner">A birthday, in four short scenes</span>
         </p>
       </div>
     </div>

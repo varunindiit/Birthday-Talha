@@ -1,6 +1,4 @@
 import cutout from '../assets/photos/talha-cutout.webp';
-import close from '../assets/photos/talha-close.webp';
-import original from '../assets/photos/talha-original.webp';
 
 // All copy and photos live here so the page can be re-worded, or given
 // more photographs, without touching a component.
@@ -8,7 +6,6 @@ import original from '../assets/photos/talha-original.webp';
 export const person = 'Talha';
 export const sender = 'Indiit Solutions';
 export const dateLabel = '6 October 2026';
-export const dateNumerals = '06.10';
 
 export const hero = {
   greeting: 'Happy birthday,',
@@ -25,39 +22,6 @@ export const letter = {
   ],
   closing: 'With warmth and respect,',
   signature: `Everyone at ${sender}`,
-};
-
-export const frames = {
-  title: 'One photograph was all we had. It turned out to be all we needed.',
-  intro: 'So we gave it the gallery treatment. Three frames, one man of the hour.',
-  outro: 'Here’s to every frame still to come.',
-  // Add more photographs here; each variant has its own framing in Frames.css.
-  items: [
-    {
-      variant: 'poster',
-      src: cutout,
-      width: 1145,
-      height: 1188,
-      alt: `${person} in a black knitted jumper, looking off to one side`,
-      caption: 'Today’s headliner',
-    },
-    {
-      variant: 'arch',
-      src: close,
-      width: 700,
-      height: 910,
-      alt: `A closer portrait of ${person}`,
-      caption: 'Same man, warmer light',
-    },
-    {
-      variant: 'print',
-      src: original,
-      width: 880,
-      height: 1100,
-      alt: `${person} in the original photograph`,
-      caption: `${person}, exactly as he is`,
-    },
-  ],
 };
 
 export const celebration = {

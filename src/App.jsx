@@ -6,7 +6,6 @@ import SmoothScroll from './components/SmoothScroll.jsx';
 import { prefersReducedMotion, ScrollTrigger } from './lib/gsap.js';
 import Celebration from './sections/Celebration.jsx';
 import Finale from './sections/Finale.jsx';
-import Frames from './sections/Frames.jsx';
 import Hero from './sections/Hero.jsx';
 import Letter from './sections/Letter.jsx';
 
@@ -39,7 +38,6 @@ export default function App() {
       <main>
         <Hero entered={phase !== 'loading'} />
         <Letter />
-        <Frames />
         <Celebration />
         <Finale onReplay={replay} />
       </main>
