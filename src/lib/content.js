@@ -4,7 +4,7 @@ import cutout from '../assets/photos/talha-cutout.webp';
 // more photographs, without touching a component.
 
 export const person = 'Talha';
-export const sender = 'Indiit Solutions';
+export const sender = 'Indi IT Solutions';
 export const dateLabel = '6 October 2026';
 
 export const hero = {
@@ -17,7 +17,7 @@ export const letter = {
   salutation: `Dear ${person},`,
   paragraphs: [
     'Some people are simply good to work with. You are one of them. You bring clear thinking, honest feedback and a steady kind of trust that makes everyone around the table do better work.',
-    'Today has nothing to do with timelines or deliverables. It is about you. We hope the day is unhurried, that the people you love are close, and that someone else is taking care of the cake.',
+    // 'Today has nothing to do with timelines or deliverables. It is about you. We hope the day is unhurried, that the people you love are close, and that someone else is taking care of the cake.',
     'Thank you for letting us build alongside you. May the year ahead bring good health, real joy, and every success you are working towards.',
   ],
   closing: 'With warmth and respect,',
