@@ -67,12 +67,13 @@
   will-change: transform;
 }
 
-/* Set as one lockup with the name: centred over it and nearly as wide. */
+/* Centred over the name and spanning about 60% of the screen. The height cap
+   only bites on very wide, short windows, so the line never runs off the top. */
 .hero__greeting {
   display: block;
   overflow: hidden;
   padding: 0.1em var(--gutter) 0.14em;
-  font-size: clamp(2rem, min(11vw, 11svh), 7.5rem);
+  font-size: max(2rem, min(11.3vw, 23svh));
   font-style: italic;
   text-align: center;
   font-weight: 300;

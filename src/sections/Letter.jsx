@@ -32,9 +32,6 @@ export default function Letter() {
           <SplitReveal as="h2" id="letter-title" className="letter__salutation">
             {letter.salutation}
           </SplitReveal>
-          <Reveal as="p" className="letter__meta" delay={0.3}>
-            A letter from {sender}.
-          </Reveal>
         </div>
 
         <div className="letter__body">

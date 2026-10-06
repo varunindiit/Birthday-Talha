@@ -1,11 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import CursorGlow from './components/CursorGlow.jsx';
-import Header from './components/Header.jsx';
 import Loader from './components/Loader.jsx';
 import SmoothScroll from './components/SmoothScroll.jsx';
 import { prefersReducedMotion, ScrollTrigger } from './lib/gsap.js';
-import Celebration from './sections/Celebration.jsx';
-import Finale from './sections/Finale.jsx';
 import Hero from './sections/Hero.jsx';
 import Letter from './sections/Letter.jsx';
 
@@ -26,20 +23,14 @@ export default function App() {
 
   const reveal = useCallback(() => setPhase('revealing'), []);
   const finish = useCallback(() => setPhase('done'), []);
-  const replay = useCallback(() => {
-    if (!prefersReducedMotion()) setPhase('loading');
-  }, []);
 
   return (
     <SmoothScroll locked={phase !== 'done'}>
       {phase !== 'done' && <Loader onReveal={reveal} onDone={finish} />}
       <CursorGlow />
-      <Header />
       <main>
         <Hero entered={phase !== 'loading'} />
         <Letter />
-        <Celebration />
-        <Finale onReplay={replay} />
       </main>
       <div className="grain" aria-hidden="true" />
     </SmoothScroll>

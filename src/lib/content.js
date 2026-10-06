@@ -4,7 +4,7 @@ import cutout from '../assets/photos/talha-cutout.webp';
 // more photographs, without touching a component.
 
 export const person = 'Talha';
-export const sender = 'Indi IT Solutions';
+export const sender = 'Indi IT Team';
 export const dateLabel = '6 October 2026';
 
 export const hero = {
@@ -22,21 +22,4 @@ export const letter = {
   ],
   closing: 'With warmth and respect,',
   signature: `Everyone at ${sender}`,
-};
-
-export const celebration = {
-  title: `Make a wish, ${person}.`,
-  before: 'One candle, on us. All it needs is you.',
-  after: 'There it is. May this year bring everything you are building towards.',
-  light: 'Light the candle',
-  again: 'Celebrate again',
-  status: `The candle is lit. Happy birthday, ${person}.`,
-  days: 365,
-  daysLabel: 'new days, starting today. Every one of them is yours.',
-};
-
-export const finale = {
-  wish: `Wishing you a wonderful birthday, ${person}.`,
-  from: `From everyone at ${sender}.`,
-  replay: 'Watch it again',
 };
