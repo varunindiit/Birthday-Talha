@@ -33,7 +33,7 @@ export default function Letter() {
             {letter.salutation}
           </SplitReveal>
           <Reveal as="p" className="letter__meta" delay={0.3}>
-            A letter from {sender}, written for {dateLabel}.
+            A letter from {sender}.
           </Reveal>
         </div>
 

@@ -1,17 +1,50 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import { createConfetti } from '../lib/confetti.js';
 import { hero, person } from '../lib/content.js';
-import { gsap, prefersReducedMotion, useGSAP } from '../lib/gsap.js';
+import { gsap, hasFinePointer, prefersReducedMotion, useGSAP } from '../lib/gsap.js';
 import './Hero.css';
 
-// Scene one. The name fills the screen and Talha rises into it.
+// Party poppers: one in each lower corner, fired up and across the name.
+// Angles are radians (-π/2 is straight up); counts are per popper, and `reach`
+// scales the throw to the height of the stage (1 just clears the top).
+const POPPERS = [
+  { x: 0.03, angle: -Math.PI * 0.36 },
+  { x: 0.97, angle: -Math.PI * 0.64 },
+];
+const POP = { count: 95, reach: 1, spread: 0.85, ribbons: 0.22, gravity: 0.6 };
+const POP_ENCORE = { count: 55, reach: 0.72, spread: 1.1, ribbons: 0.3, gravity: 0.6 };
+
+// Scene one. The greeting and the name head the stage, and Talha rises into them.
 // `entered` flips to true as the opening curtain lifts.
 export default function Hero({ entered }) {
   const root = useRef(null);
+  const canvas = useRef(null);
+  const confetti = useRef(null);
+
+  useEffect(() => {
+    confetti.current = createConfetti(canvas.current);
+    return () => confetti.current.destroy();
+  }, []);
 
   // Entrance — plays once per curtain lift.
   useGSAP(
     () => {
       if (!entered || prefersReducedMotion()) return;
+
+      const pop = ({ count, reach, ...volley }) => {
+        const { clientWidth: width, clientHeight: height } = root.current;
+        const scale = hasFinePointer() ? 1 : 0.6;
+        POPPERS.forEach(({ x, angle }) => {
+          confetti.current?.burst({
+            ...volley,
+            x: width * x,
+            y: height * 0.98,
+            angle,
+            count: Math.round(count * scale),
+            power: gsap.utils.clamp(22, 42, height / 24) * reach,
+          });
+        });
+      };
 
       gsap
         .timeline({ defaults: { ease: 'cine' }, delay: 0.3 })
@@ -24,6 +57,9 @@ export default function Hero({ entered }) {
         )
         .from('.hero__portrait-img', { scale: 1.16, yPercent: 8, duration: 2, ease: 'power3.out' }, 0.35)
         .from('.hero__greeting-inner', { yPercent: 115, duration: 1.1 }, 0.95)
+        // The poppers go off as the name lands, with a lighter encore behind them.
+        .call(pop, [POP], 1.15)
+        .call(pop, [POP_ENCORE], 1.6)
         .from('.hero__lede, .hero__scroll', { y: 20, autoAlpha: 0, duration: 0.9, stagger: 0.12 }, 1.35);
     },
     { scope: root, dependencies: [entered], revertOnUpdate: true },
@@ -100,6 +136,7 @@ export default function Hero({ entered }) {
         </a>
       </div>
 
+      <canvas ref={canvas} className="hero__confetti" aria-hidden="true" />
       <div className="hero__shade" aria-hidden="true" />
     </section>
   );
