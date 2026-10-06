@@ -1,0 +1,68 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.loader__panel {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.loader__panel--dark {
+  background: radial-gradient(90% 70% at 50% 110%, var(--wine) 0%, var(--cellar) 70%);
+}
+
+.loader__panel--flame {
+  background: linear-gradient(180deg, var(--flame), var(--ember));
+}
+
+.loader__content {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: clamp(0.9rem, 2.2vh, 1.5rem);
+  padding-inline: var(--gutter);
+  text-align: center;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.loader__presents,
+.loader__occasion {
+  overflow: hidden;
+  font-size: var(--step-0);
+  color: var(--ash);
+}
+
+.loader__presents-inner,
+.loader__occasion-inner {
+  display: block;
+}
+
+.loader__rule {
+  width: min(16rem, 50vw);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--flame), transparent);
+}
+
+.loader__name {
+  display: flex;
+  overflow: hidden;
+  padding: 0.08em 0.06em 0.14em;
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 19vw, 13rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  color: var(--champagne);
+}
+
+.loader__char {
+  display: block;
+  will-change: transform;
+}

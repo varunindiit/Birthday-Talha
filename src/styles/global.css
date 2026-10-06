@@ -1,0 +1,208 @@
+/* ---------------------------------------------------------------------------
+   Tokens
+   Wine and champagne, lit by a single candle.
+--------------------------------------------------------------------------- */
+:root {
+  --wine: #5a1022;
+  --wine-bright: #7c1832;
+  --cellar: #23050d;
+  --champagne: #f3e3c3;
+  --champagne-deep: #e6cfa4;
+  --flame: #ffb347;
+  --ember: #ff6a3d;
+  --ink: #3a0a17;
+  --ash: #cdb9ae;
+
+  --font-display: 'Fraunces Variable', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-body: 'Hanken Grotesk Variable', 'Helvetica Neue', Arial, sans-serif;
+
+  --step--1: clamp(0.84rem, 0.8rem + 0.18vw, 0.95rem);
+  --step-0: clamp(1rem, 0.95rem + 0.25vw, 1.15rem);
+  --step-1: clamp(1.2rem, 1.05rem + 0.7vw, 1.7rem);
+  --step-2: clamp(1.5rem, 1.15rem + 1.7vw, 2.7rem);
+  --step-3: clamp(2.1rem, 1.3rem + 3.6vw, 4.6rem);
+  --step-4: clamp(2.6rem, 1.1rem + 6.6vw, 7.5rem);
+
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --sheet-radius: clamp(1.5rem, 4vw, 3.5rem);
+  --header-height: clamp(3.75rem, 3rem + 2vw, 5rem);
+
+  --ease-cine: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background: var(--cellar);
+}
+
+html.is-locked,
+html.is-locked body {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  overflow-x: clip;
+  background: var(--cellar);
+  color: var(--champagne);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+p,
+figure {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--flame);
+  color: var(--cellar);
+}
+
+:focus-visible {
+  outline: 2px solid var(--flame);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Every scene after the hero is a "sheet" that slides over the one before it. */
+.sheet {
+  position: relative;
+  z-index: 1;
+}
+
+.sheet--rounded {
+  margin-top: calc(var(--sheet-radius) * -1);
+  border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
+}
+
+/* SplitText line masks: give descenders and italics room so nothing is clipped. */
+.split-line-mask {
+  padding-block: 0.14em;
+  margin-block: -0.14em;
+}
+
+/* Film grain — static, so it costs nothing while scrolling. */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.09;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 0.93  0 0 0 0 0.82  0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------------------------------------------------------------------------
+   Button
+--------------------------------------------------------------------------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  min-height: 3.25rem;
+  padding: 0.85em 1.8em;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: var(--champagne);
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.35s var(--ease-cine),
+    color 0.35s var(--ease-cine),
+    box-shadow 0.35s var(--ease-cine);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.button:hover {
+  background: var(--flame);
+  box-shadow: 0 0 0 0.4rem rgb(255 179 71 / 0.16);
+}
+
+.button:active {
+  background: var(--ember);
+}
+
+.button--ghost {
+  background: transparent;
+  border-color: rgb(243 227 195 / 0.4);
+  color: var(--champagne);
+}
+
+.button--ghost:hover {
+  background: var(--champagne);
+  color: var(--ink);
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

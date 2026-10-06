@@ -1,0 +1,221 @@
+.hero {
+  --name-size: min(26vw, 38svh);
+
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  height: 100svh;
+  min-height: 34rem;
+  overflow: clip;
+  isolation: isolate;
+  background: radial-gradient(130% 85% at 50% 100%, var(--wine-bright) 0%, var(--wine) 34%, var(--cellar) 100%);
+}
+
+/* Candle glow rising from the foot of the stage. */
+.hero__glow-wrap {
+  --glow-size: max(70rem, 120vw);
+
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: var(--glow-size);
+  aspect-ratio: 1;
+  /* Positioned with margins: GSAP owns this element's transform. */
+  margin: 0 0 calc(var(--glow-size) * -0.52) calc(var(--glow-size) / -2);
+  pointer-events: none;
+}
+
+.hero__glow {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgb(255 190 110 / 0.6) 0%,
+    rgb(255 130 70 / 0.34) 32%,
+    rgb(255 106 61 / 0.12) 58%,
+    transparent 78%
+  );
+  animation: hero-breathe 7s ease-in-out infinite alternate;
+}
+
+@keyframes hero-breathe {
+  from {
+    opacity: 0.82;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.hero__stack {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: var(--header-height);
+}
+
+.hero__title {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  /* The portrait's head rises into the foot of the name. */
+  margin-bottom: calc(var(--name-size) * -0.34);
+  will-change: transform;
+}
+
+.hero__greeting {
+  display: block;
+  overflow: hidden;
+  padding: 0.1em var(--gutter) 0.18em;
+  font-size: clamp(1.4rem, 1rem + 1.7vw, 2.75rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--champagne);
+}
+
+.hero__greeting-inner {
+  display: block;
+}
+
+.hero__name {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0.04em 0 0.1em;
+  font-size: var(--name-size);
+  font-weight: 900;
+  line-height: 0.82;
+  letter-spacing: -0.045em;
+  color: var(--champagne);
+  user-select: none;
+}
+
+.hero__char {
+  display: block;
+  will-change: transform;
+}
+
+.hero__portrait {
+  position: relative;
+  z-index: 2;
+  flex: none;
+  height: min(62svh, 118vw);
+  aspect-ratio: 1145 / 1188;
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+
+.hero__portrait-clip {
+  height: 100%;
+}
+
+.hero__portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: 50% 100%;
+  /* Only the jumper dissolves into the glow; the face (top 55% of the image) stays fully opaque. */
+  -webkit-mask-image:
+    linear-gradient(to bottom, #000 68%, transparent 99%),
+    linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to bottom, #000 68%, transparent 99%),
+    linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  mask-composite: intersect;
+}
+
+.hero__foot {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 4rem var(--gutter) clamp(1.25rem, 3.5vh, 2.5rem);
+  /* A soft floor of shadow so the words stay readable over the knitwear. */
+  background: linear-gradient(to top, rgb(35 5 13 / 0.72) 0%, rgb(35 5 13 / 0.35) 45%, transparent 100%);
+}
+
+.hero__lede {
+  max-width: 17ch;
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  line-height: 1.25;
+  color: var(--champagne);
+}
+
+.hero__scroll {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+  font-size: var(--step--1);
+  text-align: right;
+  text-decoration: none;
+  color: var(--champagne);
+}
+
+.hero__scroll-line {
+  position: relative;
+  width: 1px;
+  height: clamp(2.5rem, 7vh, 4rem);
+  margin-right: 0.25rem;
+  overflow: hidden;
+  background: rgb(243 227 195 / 0.25);
+}
+
+.hero__scroll-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--flame);
+  animation: hero-scroll-cue 2.2s var(--ease-cine) infinite;
+}
+
+@keyframes hero-scroll-cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  60%,
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.hero__shade {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: var(--cellar);
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 599px) {
+  .hero {
+    --name-size: 30.5vw;
+  }
+
+  .hero__lede {
+    max-width: 14ch;
+  }
+
+  .hero__scroll span:first-child {
+    max-width: 13ch;
+  }
+}
+
+/* Tall screens (phones, tablets held upright): more room, larger portrait. */
+@media (max-aspect-ratio: 1 / 1) {
+  .hero__portrait {
+    height: min(66svh, 150vw);
+  }
+}

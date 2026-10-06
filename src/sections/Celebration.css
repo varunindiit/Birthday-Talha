@@ -1,0 +1,200 @@
+.celebration {
+  display: grid;
+  align-content: center;
+  gap: clamp(3.5rem, 9vh, 7rem);
+  min-height: 100svh;
+  padding: clamp(5rem, 14vh, 9rem) var(--gutter) clamp(5rem, 12vh, 8rem);
+  overflow: hidden;
+  background: var(--cellar);
+  text-align: center;
+}
+
+.celebration__embers,
+.celebration__bloom {
+  position: absolute;
+  pointer-events: none;
+}
+
+.celebration__embers {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Warm light that fills the room once the candle is lit. */
+.celebration__bloom {
+  --bloom-size: max(60rem, 130vw);
+
+  top: calc(var(--bloom-size) * -0.32);
+  left: 50%;
+  width: var(--bloom-size);
+  aspect-ratio: 1;
+  /* Positioned with margins: GSAP owns this element's transform. */
+  margin-left: calc(var(--bloom-size) / -2);
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgb(255 150 80 / 0.34) 0%,
+    rgb(124 24 50 / 0.5) 42%,
+    transparent 74%
+  );
+  visibility: hidden;
+  opacity: 0;
+}
+
+.is-lit .celebration__bloom {
+  visibility: visible;
+  opacity: 1;
+}
+
+.celebration__stage {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: clamp(1.25rem, 3vh, 2rem);
+}
+
+.celebration__title {
+  max-width: 12ch;
+  font-size: var(--step-4);
+  font-weight: 400;
+}
+
+.celebration__line {
+  max-width: 34ch;
+  min-height: 3.2em;
+  color: var(--ash);
+  animation: celebration-line 0.9s var(--ease-cine) both;
+}
+
+@keyframes celebration-line {
+  from {
+    opacity: 0;
+    transform: translateY(0.6rem);
+  }
+}
+
+.magnetic {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* ----------------------------------------------------------------- candle */
+.candle {
+  position: relative;
+  width: 1.35rem;
+  height: clamp(7rem, 18vh, 11rem);
+  margin-top: 3.5rem;
+}
+
+.candle__body {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.3rem 0.3rem 0.12rem 0.12rem;
+  background: linear-gradient(90deg, #c9ae80 0%, var(--champagne) 38%, #fff6e0 56%, #d6bd8f 100%);
+  box-shadow: 0 1.2rem 2.4rem rgb(0 0 0 / 0.35);
+}
+
+.candle__wick {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  width: 2px;
+  height: 0.6rem;
+  translate: -50% 0;
+  border-radius: 1px;
+  background: #1c0d09;
+}
+
+.candle__flame {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.3rem);
+  width: 1.5rem;
+  height: 2.5rem;
+  margin-left: -0.75rem;
+  overflow: visible;
+  transform-origin: 50% 100%;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.candle__flame-core {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: candle-flicker 1.7s ease-in-out infinite alternate;
+}
+
+@keyframes candle-flicker {
+  0% {
+    transform: scale(1, 1) rotate(-1.5deg);
+  }
+  35% {
+    transform: scale(0.95, 1.06) rotate(1.5deg);
+  }
+  70% {
+    transform: scale(1.04, 0.96) rotate(-0.5deg);
+  }
+  100% {
+    transform: scale(0.97, 1.04) rotate(2deg);
+  }
+}
+
+.candle__halo {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  width: 17rem;
+  height: 17rem;
+  margin: 0 0 -7.5rem -8.5rem;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgb(255 190 110 / 0.5),
+    rgb(255 106 61 / 0.14) 50%,
+    transparent 76%
+  );
+  visibility: hidden;
+  opacity: 0;
+}
+
+.is-lit .candle__flame,
+.is-lit .candle__halo {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------------- days */
+.celebration__days {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+}
+
+.celebration__days-number {
+  font-family: var(--font-display);
+  font-size: clamp(5.5rem, 3rem + 13vw, 15rem);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums lining-nums;
+  color: transparent;
+  background: linear-gradient(180deg, var(--champagne) 20%, var(--flame) 70%, var(--ember) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.celebration__days-label {
+  max-width: 26ch;
+  color: var(--ash);
+}
+
+.celebration__confetti {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
